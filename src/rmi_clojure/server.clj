@@ -5,7 +5,7 @@
 ;; Registry server
 (def rmi-registry (LocateRegistry/createRegistry 1099))
 
-(defn stop-rmi-registry [](UnicastRemoteObject/unexportObject rmi-registry true))
+(defn stop-rmi-registry [] (UnicastRemoteObject/unexportObject rmi-registry true))
 
 ;; function
 (defn hello-server []
@@ -16,6 +16,7 @@
   (UnicastRemoteObject/exportObject (hello-server) 0))
 
 (defn register-server []
-  (.rebind (LocateRegistry/getRegistry) "olarmi" skeleton))
+  (.rebind (LocateRegistry/getRegistry) "olarmi" skeleton)
+  (println "Server in live for connection..."))
 
 (register-server)
